@@ -3,10 +3,10 @@ import colors from 'vuetify/es5/util/colors'
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    titleTemplate: '%s - diknas-online-sekolah',
-    title: 'diknas-online-sekolah',
+    titleTemplate: '%s - Diknas Online Sekolah',
+    title: 'Diknas Online Sekolah',
     htmlAttrs: {
-      lang: 'en',
+      lang: 'id',
     },
     meta: [
       { charset: 'utf-8' },
@@ -38,12 +38,13 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
+    '@nuxtjs/dotenv'
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
-    baseURL: '/',
+    baseURL: `${process.env.DIKNAS_ONLINE_API_URL}`,
   },
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
@@ -67,4 +68,8 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
+
+  env: {
+    DIKNAS_ONLINE_API_URL: 'http://diknas-online-api.test/api'
+  },
 }
