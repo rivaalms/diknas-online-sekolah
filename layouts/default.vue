@@ -260,7 +260,7 @@ export default {
 }
 
 .app-bar {
-  background-color: #448AFF!important;
+  background-color: #2979FF!important;
 }
 
 /* .v-toolbar__content {

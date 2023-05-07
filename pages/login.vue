@@ -112,7 +112,7 @@ export default {
 } */
 
 .bg-primary {
-   background-color: #2979FF;
+   background-color: #2962FF;
 }
 
 .bg-light {
