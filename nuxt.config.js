@@ -4,7 +4,7 @@ export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     titleTemplate: '%s - Diknas Online Sekolah',
-    title: 'Diknas Online Sekolah',
+    // title: 'Diknas Online Sekolah',
     htmlAttrs: {
       lang: 'id',
     },
@@ -105,4 +105,9 @@ export default {
   env: {
     DIKNAS_ONLINE_API_URL: 'http://diknas-online-api.test'
   },
+
+  // NOTE: don't forget to delete this when stepping up to production
+  server: {
+    port: 4000
+  }
 }
