@@ -218,6 +218,12 @@ export default {
     }
   },
 
+  head() {
+      return {
+        title: 'Profil'
+      }
+  },
+
   computed: {
     ...mapState(['isAuth']),
 

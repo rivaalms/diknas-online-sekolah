@@ -230,6 +230,12 @@ export default {
       }
    },
 
+   head() {
+      return {
+         title: 'Data Statistik Siswa'
+      }
+   },
+
    computed: {
       formGradeList() {
          const data = (this.user.school_type_id === 1) ? [7, 8, 9] : [1, 2, 3, 4, 5, 6]

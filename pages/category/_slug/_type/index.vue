@@ -136,6 +136,12 @@ export default {
       }
    },
 
+   head() {
+      return {
+         title: this.category && this.type ? `${this.category.name}: ${this.type.name}` : ''
+      }
+   },
+
    computed: {
       breadcrumb() {
          const data = [

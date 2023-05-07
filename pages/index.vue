@@ -126,6 +126,12 @@ export default {
       }
    },
 
+   head() {
+      return {
+         title: 'Dashboard'
+      }
+   },
+
    computed: {
       ...mapState('user', {
          user: state => state.user

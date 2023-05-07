@@ -312,6 +312,12 @@ export default {
       }
    },
 
+   head() {
+      return {
+         title: 'Data Statistik Guru'
+      }
+   },
+
    computed: {
       formSelectRules() {
          const data = [v => !!v || 'Wajib diisi']

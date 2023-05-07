@@ -67,6 +67,12 @@ export default {
       }
    },
 
+   head() {
+      return {
+         title: 'Login'
+      }
+   },
+
    mounted() {
       this.ifLoggedIn()
    },
