@@ -108,6 +108,6 @@ export default {
 
   // NOTE: don't forget to delete this when stepping up to production
   server: {
-    port: 4000
+    port: 3000
   }
 }

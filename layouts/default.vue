@@ -147,6 +147,7 @@
     </v-main>
 
     <v-footer
+      v-if="isAuth"
       app
       inset
       absolute
