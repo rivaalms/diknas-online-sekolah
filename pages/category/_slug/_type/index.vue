@@ -92,13 +92,8 @@
 </template>
 
 <script>
-import dataTable from '@/pages/components/table'
 
 export default {
-   components: {
-      dataTable
-   },
-   
    data() {
       return {
          type: [],

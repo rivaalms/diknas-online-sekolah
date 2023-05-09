@@ -275,13 +275,7 @@
 </template>
 
 <script>
-import teacherTable from '@/pages/teachers/components/teacherTable'
-
 export default {
-   components: {
-      teacherTable
-   },
-
    data() {
       return {
          user: this.$auth.user,

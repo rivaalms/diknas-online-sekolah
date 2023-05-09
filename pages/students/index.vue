@@ -76,7 +76,7 @@
                <v-card flat>
                   <v-card-title class="text-subtitle-1">Data Siswa Berdasarkan Agama</v-card-title>
                   <v-card-text>
-                     <religion-table
+                     <students-by-religion-table
                         :headers="tableHeader"
                         :items="students"
                         :loading="tableLoading"
@@ -191,12 +191,7 @@
 </template>
 
 <script>
-import ReligionTable from '@/pages/students/components/studentsByReligionTable'
 export default {
-   components: {
-      ReligionTable,
-   },
-
    data() {
       return {
          students: [],
@@ -350,6 +345,7 @@ export default {
             this.closeDialog()
             this.submitBtnLoading = false
             this.alertTrigger = true
+            await this.setYearList()
             await this.getStudents(this.year)
          }
       },

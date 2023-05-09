@@ -74,14 +74,10 @@
 
 <script>
 import { mapState } from 'vuex'
-import dataTable from '@/pages/components/table'
 
 export default {
-   name: 'IndexPage',
-
-   components: {
-      dataTable
-   },
+   name: 'Dashboard',
+   
    async asyncData({store}) {
       await store.dispatch('user/getUserData')
    },
