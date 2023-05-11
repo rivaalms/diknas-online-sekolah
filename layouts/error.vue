@@ -1,13 +1,12 @@
 <template>
-  <v-app dark>
-    <h1 v-if="error.statusCode === 404">
-      {{ pageNotFound }}
-    </h1>
-    <h1 v-else>
-      {{ otherError }}
-    </h1>
-    <NuxtLink to="/"> Home page </NuxtLink>
-  </v-app>
+<div class="h-100 d-flex flex-column justify-center align-center bg-white">
+    <v-img v-if="error.statusCode === 404" contain height="100" src="/404.png" alt=""/>
+    <v-img v-else-if="error.statusCode === 401" contain height="100" src="/401.png" alt=""/>
+    <v-img v-else-if="error.statusCode === 500" contain height="100" src="/500.png" alt=""/>
+    <v-img v-else contain height="100" src="/error.png" alt=""/>
+
+    <v-btn router exact to="/" depressed color="primary" class="my-8">Halaman Utama</v-btn>
+</div>
 </template>
 
 <script>
@@ -20,15 +19,10 @@ export default {
       default: null,
     },
   },
-  data() {
-    return {
-      pageNotFound: '404 Not Found',
-      otherError: 'An error occurred',
-    }
-  },
+  
   head() {
     const title =
-      this.error.statusCode === 404 ? this.pageNotFound : this.otherError
+      this.error.statusCode
     return {
       title,
     }
@@ -37,7 +31,11 @@ export default {
 </script>
 
 <style scoped>
-h1 {
-  font-size: 20px;
+.h-100 {
+  height: 100%;
+}
+
+.bg-white {
+  background-color: white;
 }
 </style>
