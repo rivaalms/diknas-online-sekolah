@@ -3,31 +3,10 @@
       <div class="mb-12">
          <div class="d-flex justify-space-between align-center mt-5 mb-8">
             <p class="text-h6 mb-0">Data Statistik Siswa</p>
-            <v-breadcrumbs
-               :items="breadcrumb"
-               class="px-0 py-2"
-            >
-               <template #item="{item}">
-                  <v-breadcrumbs-item
-                     exact
-                     :to="item.href"
-                     :disabled="item.disabled"
-                  >{{ item.text }}</v-breadcrumbs-item>
-               </template>
-            </v-breadcrumbs>
+            <app-breadcrumb/>
          </div>
-
-         <v-alert
-            :type="alertType"
-            :color="alertColor"
-            :icon="alertIcon"
-            dismissible
-            text
-            transition="fade-transition"
-            :value="alertTrigger"
-            >
-               {{ alertMessage }}
-            </v-alert>
+         
+         <app-alert/>
          
          <v-row dense>
             <v-col cols="12">
@@ -87,106 +66,9 @@
          </v-row>
       </div>
 
-      <v-dialog
-         v-model="dialogTrigger"
-         persistent
-         max-width="800px"
-      >
-         <v-card>
-            <v-card-title>
-               Input Data Siswa
-            </v-card-title>
-            <v-form ref="form" lazy-validation @submit.prevent="onSubmit">
-               <v-card-text>
-                  <v-row>
-                     <v-col cols="12" md="4">
-                        <v-text-field
-                           :value="user.name"
-                           label="Nama Sekolah"
-                           hint="Hanya baca"
-                           persistent-hint
-                           readonly
-                        ></v-text-field>
-                     </v-col>
-                     <v-col cols="12" md="4">
-                        <v-select
-                           v-model="targetItem.grade"
-                           :items="formGradeList"
-                           required
-                           label="Kelas"
-                        ></v-select>
-                     </v-col>
-                     <v-col cols="12" md="4">
-                        <v-select
-                           v-model="targetItem.year"
-                           :items="formYearList"
-                           :rules="formSelectRules"
-                           label="Tahun Ajaran"
-                     ></v-select>
-                     </v-col>
-                     <v-col cols="12" md="4">
-                        <v-text-field
-                           v-model="targetItem.islam"
-                           label="Siswa Agama Islam"
-                           hint="Masukan hanya angka"
-                           :rules="rules"
-                           @keypress="numberOnly"
-                        ></v-text-field>
-                     </v-col>
-                     <v-col cols="12" md="4">
-                        <v-text-field
-                           v-model="targetItem.catholic"
-                           label="Siswa Agama Katolik"
-                           hint="Masukan hanya angka"
-                           :rules="rules"
-                           @keypress="numberOnly"
-                        ></v-text-field>
-                     </v-col>
-                     <v-col cols="12" md="4">
-                        <v-text-field
-                           v-model="targetItem.protestant"
-                           label="Siswa Agama Protestan"
-                           hint="Masukan hanya angka"
-                           :rules="rules"
-                           @keypress="numberOnly"
-                        ></v-text-field>
-                     </v-col>
-                     <v-col cols="12" md="4">
-                        <v-text-field
-                           v-model="targetItem.hindu"
-                           label="Siswa Agama Hindu"
-                           hint="Masukan hanya angka"
-                           :rules="rules"
-                           @keypress="numberOnly"
-                        ></v-text-field>
-                     </v-col>
-                     <v-col cols="12" md="4">
-                        <v-text-field
-                           v-model="targetItem.buddha"
-                           label="Siswa Agama Buddha"
-                           hint="Masukan hanya angka"
-                           :rules="rules"
-                           @keypress="numberOnly"
-                        ></v-text-field>
-                     </v-col>
-                     <v-col cols="12" md="4">
-                        <v-text-field
-                           v-model="targetItem.konghucu"
-                           label="Siswa Agama Konghucu"
-                           hint="Masukan hanya angka"
-                           :rules="rules"
-                           @keypress="numberOnly"
-                        ></v-text-field>
-                     </v-col>
-                     <v-col cols="12" class="d-flex justify-end">
-                        <v-btn text class="me-2" @click="closeDialog">Batal</v-btn>
-                        <v-btn type="submit" color="primary" depressed :loading="submitBtnLoading" :disabled="submitBtnLoading">Simpan</v-btn>
-                     </v-col>
-                  </v-row>
-               </v-card-text>
-            </v-form>
-         </v-card>
-      </v-dialog>
+      <lazy-add-student-dialog
+         @submit="submit"
+      />
    </v-container>
 </template>
 
@@ -195,7 +77,6 @@ export default {
    data() {
       return {
          students: [],
-         // totalStudents: 0,
          totalStudentsByGrade: [],
          yearList: [],
          year: '',
@@ -212,16 +93,7 @@ export default {
 
          tableLoading: false,
          cardLoader: false,
-         dialogTrigger: false,
-         targetItem: [],
          formYearList: null,
-         submitBtnLoading: false,
-
-         alertType: 'info',
-         alertColor: 'light-blue darken-1',
-         alertIcon: 'mdi-information',
-         alertTrigger: false,
-         alertMessage: 'Data statistik siswa baru berhasil dismpan',
       }
    },
 
@@ -231,47 +103,12 @@ export default {
       }
    },
 
-   computed: {
-      formGradeList() {
-         const data = (this.user.school_type_id === 1) ? [7, 8, 9] : [1, 2, 3, 4, 5, 6]
-         return data
-      },
-
-      rules() {
-         const data = [val => (val || '').length > 0 || 'Wajib diisi']
-         return data
-      },
-
-      formSelectRules() {
-         const data = [v => !!v || 'Wajib diisi']
-         return data
-      },
-
-      breadcrumb() {
-         const data = [
-            {text: 'Dashboard', disabled: false, href: '/'},
-            {text: 'Data Statistik Siswa', disabled: true, href: '/school'}
-         ]
-         return data
-      }
-   },
-
-   watch: {
-      alertTrigger() {
-         if (this.alertTrigger === true) {
-            setTimeout(() => {
-               this.alertTrigger = false
-            }, 5000)
-         }
-      },
-   },
-
    async created() {
       await this.onCreated()
-   },
-
-   mounted() {
-
+      this.$store.dispatch('setBreadcrumb', [
+         { text: 'Dashboard', disabled: false, href: '/' },
+         { text: 'Data Statistik Siswa', disabled: true, href: '/school' }
+      ])
    },
 
    methods: {
@@ -320,44 +157,16 @@ export default {
       },
 
       dialog() {
-         this.dialogTrigger = true
          this.formYearList = this.formYearList ?? this.getFormYearList()
-         this.resetTargetItem()
+         this.$store.dispatch('setDialog', {
+            title: 'Input  Data Siswa',
+            year_list: this.formYearList,
+         })
+         this.$store.dispatch('showNewDialog')
       },
 
-      closeDialog() {
-         this.$refs.form.resetValidation()
-         this.resetTargetItem()
-         this.dialogTrigger = false
-      },
-
-      async onSubmit() {
-         if (this.$refs.form.validate()) {
-            this.submitBtnLoading = true
-            for (const item in this.targetItem) {
-               if (item !== 'school_id' && item !== 'grade' && item !== 'year') {
-                  this.targetItem[item] = Number(this.targetItem[item])
-               }
-            }
-            // console.log(this.targetItem)
-            await this.$axios.post(`/school/students`, this.targetItem)
-   
-            this.closeDialog()
-            this.submitBtnLoading = false
-            this.alertTrigger = true
-            await this.setYearList()
-            await this.getStudents(this.year)
-         }
-      },
-
-      numberOnly() {
-         const e = window.event
-         const expect = e.target.value.toString() + e.key.toString();
-         if (!/^[-+]?[0-9]*\.?[0-9]*$/.test(expect)) {
-            e.preventDefault();
-         } else {
-            return true;
-         }
+      async submit() {
+         await this.onCreated()
       },
 
       getFormYearList() {
@@ -377,20 +186,6 @@ export default {
          }
          return years.reverse()
       },
-
-      resetTargetItem() {
-         this.targetItem = {
-            school_id: this.user.id,
-            grade: this.formGradeList[0],
-            year: null,
-            islam: null,
-            catholic: null,
-            protestant: null,
-            hindu: null,
-            buddha: null,
-            konghucu: null,
-         }
-      }
    }
 }
 </script>

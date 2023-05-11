@@ -3,18 +3,7 @@
     <div class="mb-12">
       <div class="d-flex justify-space-between align-center mt-5 mb-8">
         <p class="text-h6 mb-0">Profil Akun</p>
-        <v-breadcrumbs
-          :items="breadcrumb"
-          class="px-0 py-2"
-        >
-          <template #item="{item}">
-              <v-breadcrumbs-item
-                exact
-                :to="item.href"
-                :disabled="item.disabled"
-              >{{ item.text }}</v-breadcrumbs-item>
-          </template>
-        </v-breadcrumbs>
+        <app-breadcrumb/>
       </div>
 
       <v-row dense class="align-stretch">
@@ -227,14 +216,6 @@ export default {
   computed: {
     ...mapState(['isAuth']),
 
-    breadcrumb() {
-      const data = [
-        {text: 'Dashboard', disabled: false, href: '/'},
-        {text: 'Profil Akun', disabled: true, href: '/profile'}
-      ]
-      return data
-    },
-
     passwordRules() {
       const data = [
         val => {
@@ -279,6 +260,11 @@ export default {
 
   async mounted() {
     await this.getSelf()
+    
+    this.$store.dispatch('setBreadcrumb', [
+        { text: 'Dashboard', disabled: false, href: '/' },
+        { text: 'Profil Akun', disabled: true, href: '/profile' }
+    ])
   },
 
   methods: {

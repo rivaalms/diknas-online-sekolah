@@ -3,18 +3,7 @@
    <div class="mb-6">
       <div class="d-flex justify-space-between align-center mt-5 mb-8">
          <p class="text-h6 mb-0">Dashboard</p>
-         <v-breadcrumbs
-         :items="breadcrumb"
-         class="px-0 py-2"
-      >
-         <template #item="{item}">
-            <v-breadcrumbs-item
-               exact
-               :to="item.href"
-               :disabled="item.disabled"
-            >{{ item.text }}</v-breadcrumbs-item>
-         </template>
-      </v-breadcrumbs>
+         <app-breadcrumb/>
       </div>
       <v-row dense>
          <v-col cols="12" md="6">
@@ -108,6 +97,10 @@ export default {
                value: 'status'
             },
             {
+               text: 'Terakhir diperbarui',
+               value: 'date'
+            },
+            {
                text: 'Aksi',
                sortable: false,
                value: 'actions'
@@ -132,13 +125,12 @@ export default {
       ...mapState('user', {
          user: state => state.user
       }),
-
-      breadcrumb() {
-         const data = [
-            {text: 'Dashboard', disabled: true, href: '/'},
-         ]
-         return data
-      }
+   },
+   
+   created() {
+      this.$store.dispatch('setBreadcrumb', [
+         { text: 'Dashboard', disabled: true, href: '/' }
+      ])
    },
    
    async mounted() {

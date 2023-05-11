@@ -3,18 +3,7 @@
       <div class="mb-12">
          <div class="d-flex justify-space-between align-center mt-5 mb-8">
             <p class="text-h6 mb-0">{{ category.name }}: {{ type.name }}</p>
-            <v-breadcrumbs
-               :items="breadcrumb"
-               class="px-0 py-2"
-            >
-               <template #item="{item}">
-                  <v-breadcrumbs-item
-                     exact
-                     :to="item.href"
-                     :disabled="item.disabled"
-                  >{{ item.text }}</v-breadcrumbs-item>
-               </template>
-            </v-breadcrumbs>
+            <app-breadcrumb/>
          </div>
          
          <v-row dense>
@@ -137,17 +126,6 @@ export default {
       }
    },
 
-   computed: {
-      breadcrumb() {
-         const data = [
-            {text: 'Dashboard', disabled: false, href: '/'},
-            {text: `${this.category.name}` ?? '', disabled: false, href: `/category/${this.category.slug}`},
-            {text: `${this.type.name}` ?? '', disabled: true, href: `/category/${this.category.slug}/${this.type.slug}`}
-         ]
-         return data
-      }
-   },
-
    async mounted() {
       await this.$axios.get('/getCategories').then((resp) => {
          let category = null
@@ -188,6 +166,12 @@ export default {
       })
 
       this.dataHandler()
+
+      this.$store.dispatch('setBreadcrumb', [
+            { text: 'Dashboard', disabled: false, href: '/' },
+            { text: `${this.category.name}` ?? '', disabled: false, href: `/category/${this.category.slug}` },
+            { text: `${this.type.name}` ?? '', disabled: true, href: `/category/${this.category.slug}/${this.type.slug}` }
+      ])
    },
 
    methods: {
