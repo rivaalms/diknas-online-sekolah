@@ -56,6 +56,33 @@
                </v-card-text>
             </v-card>
          </v-col>
+         <v-col cols="12">
+            <v-card flat>
+               <v-card-title class="text-subtitle-1">
+                  Kategori Data
+               </v-card-title>
+               <v-card-text>
+                  <v-row dense>
+                     <v-col
+                        v-for="item in categories"
+                        :key="item.slug"
+                        cols="3" sm="4" md="2">
+                        <v-card
+                           flat
+                           outlined
+                           class="v-btn text-capitalize"
+                           router exact
+                           :to="{name: 'category-slug', params: { slug: item.slug }}"
+                        >
+                           <v-card-text>
+                              {{ item.name }}
+                           </v-card-text>
+                        </v-card>
+                     </v-col>
+                  </v-row>
+               </v-card-text>
+            </v-card>
+         </v-col>
       </v-row>
    </div>
 </v-container>
@@ -110,8 +137,8 @@ export default {
          loading: true,
          totalStudents: 0,
          totalTeachers: 0,
-         year: (new Date().getMonth() > 5) ? `${new Date().getFullYear()}-${(new Date().getFullYear()+1)}` : `${(new Date().getFullYear()-1)}-${new Date().getFullYear()}`
-         // status: [],
+         year: (new Date().getMonth() > 5) ? `${new Date().getFullYear()}-${(new Date().getFullYear()+1)}` : `${(new Date().getFullYear()-1)}-${new Date().getFullYear()}`,
+         categories: []
       }
    },
 
@@ -140,6 +167,7 @@ export default {
       })
       await this.getStudents(this.year)
       await this.getTeachers(this.year)
+      await this.getCategories()
    },
 
    methods: {
@@ -179,6 +207,12 @@ export default {
             this.totalTeachers = totalTeachers
          })
       },
+
+      async getCategories() {
+         await this.$axios.get('/getCategories').then((resp) => {
+            this.categories = resp.data.data
+         })
+      }
    }
 
 }
