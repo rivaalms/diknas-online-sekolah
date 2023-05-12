@@ -43,7 +43,6 @@
                </v-card-title>
                <v-card-text>
                   <data-table
-                     :headers="tableHeaders"
                      :items="data.data"
                      :total-page="data.last_page"
                      :current-page="data.current_page"
@@ -100,39 +99,6 @@ export default {
    
    data() {
       return {
-         tableHeaders: [
-            {
-               text: 'ID',
-               value: 'id'
-            },
-            {
-               text: 'Tipe data',
-               value: 'type'
-            },
-            {
-               text: 'Kategori',
-               sortable: false,
-               value: 'category'
-            },
-            {
-               text: 'Tahun ajaran',
-               value: 'year'
-            },
-            {
-               text: 'Status',
-               sortable: false,
-               value: 'status'
-            },
-            {
-               text: 'Terakhir diperbarui',
-               value: 'date'
-            },
-            {
-               text: 'Aksi',
-               sortable: false,
-               value: 'actions'
-            }
-         ],
          data: [],
          loading: true,
          totalStudents: 0,

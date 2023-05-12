@@ -88,31 +88,6 @@ export default {
          dataTypes: [],
          category: [],
          categories: [],
-         headers: [
-            {
-               text: 'Tipe data',
-               value: 'type'
-            },
-            {
-               text: 'Kategori',
-               sortable: false,
-               value: 'category'
-            },
-            {
-               text: 'Tahun ajaran',
-               value: 'year'
-            },
-            {
-               text: 'Status',
-               sortable: false,
-               value: 'status'
-            },
-            {
-               text: 'Aksi',
-               sortable: false,
-               value: 'actions'
-            }
-         ],
          data: [],
          loading: true,
       }

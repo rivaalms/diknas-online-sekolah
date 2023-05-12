@@ -33,7 +33,7 @@
 
    <!-- //SECTION - Data table -->
    <v-data-table
-      :headers="headers"
+      :headers="tableHeader"
       :items="items"
       :page.sync="current"
       :loading="loading"
@@ -141,12 +141,9 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
    props: {
-      headers: {
-         type: Array,
-         default: () => {}
-      },
       items: {
          type: Array,
          default: () => {}
@@ -191,6 +188,10 @@ export default {
          selectedCategory: null,
          formYearList: null,
       }
+   },
+
+   computed: {
+      ...mapState(['tableHeader'])
    },
 
    async mounted() {
