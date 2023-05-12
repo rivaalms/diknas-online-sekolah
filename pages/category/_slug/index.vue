@@ -1,6 +1,6 @@
 <template>
    <v-container fluid>
-      <div class="mb-12">
+      <div>
          <div class="d-flex justify-space-between align-center mt-5 mb-8">
             <p class="text-h6 mb-0">{{ category.name }}</p>
 
