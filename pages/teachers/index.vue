@@ -63,8 +63,8 @@ export default {
          teachers: [],
 
          tableHeaders: [
-            {text: 'Mata Pelajaran', value: 'subject'},
-            {text: 'Jumlah', value: 'value'}
+            {text: 'Mata Pelajaran', value: 'subject', width: '50%'},
+            {text: 'Jumlah', value: 'value', width: '50%'}
          ],
 
          targetItem: [],
