@@ -50,7 +50,7 @@
                      :from="data.from"
                      :to="data.to"
                      :total="data.total"
-                     @data-handler="(current, status_id) => dataHandler(current, status_id)"
+                     @data-handler="(current, status_id, year) => dataHandler(current, status_id, year)"
                   ></data-table>
                </v-card-text>
             </v-card>
@@ -137,12 +137,13 @@ export default {
    },
 
    methods: {
-      dataHandler(current, statusId) {
+      dataHandler(current, statusId, year) {
          this.loading = true
          this.$axios.get(`/school/getData/${this.user.id}`, {
             params: {
                page: current,
-               status: statusId
+               status: statusId,
+               year
             }
          }).then((resp) => {
             this.data = resp.data.data

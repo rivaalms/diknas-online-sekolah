@@ -7,7 +7,7 @@
    <div class="d-flex justify-space-between align-center">
       <div class="d-flex align-center flex-grow-1">
          <span class="me-2 text-subtitle-2">Filter: </span>
-         <v-col cols="2">
+         <v-col cols="3">
             <v-select
                v-model="statusId"
                :items="status"
@@ -19,6 +19,20 @@
                class="pt-0 mt-0"
                @input="dataHandler()"
             ></v-select>
+         </v-col>
+         <v-col cols="3">
+            <v-text-field
+               v-model="year"
+               label="Tahun ajaran"
+               clearable
+               append-icon="mdi-magnify"
+               hide-details="auto"
+               class="pt-0 mt-0"
+               placeholder="Enter untuk mencari"
+               @keydown.enter="dataHandler()"
+               @click:clear="emptyYearDataHandler()"
+               @click:append="dataHandler()"
+            ></v-text-field>
          </v-col>
       </div>
       <v-btn
@@ -179,6 +193,7 @@ export default {
          current: this.currentPage ? this.currentPage : 1,
          statusId: null,
          status: [],
+         year: null,
 
          targetItem: {},
          revisions: [],
@@ -203,7 +218,12 @@ export default {
 
    methods: {
       dataHandler() {
-         this.$emit('data-handler', this.current, this.statusId)
+         this.$emit('data-handler', this.current, this.statusId, this.year)
+      },
+
+      emptyYearDataHandler() {
+         this.year = null
+         this.dataHandler()
       },
 
       getColor(status) {
