@@ -1,11 +1,12 @@
 <template>
    <div id="container">
       <v-row dense>
-         <v-col cols="6" class="bg-primary d-flex flex-column justify-center" align-self="stretch">
+         <v-col cols="4" class="bg-primary d-flex flex-column justify-center" align-self="stretch">
             <v-container class="mw-75 mb-12 pb-12">
                <div class="d-flex justify-center mb-6">
                   <p class="text-h4 white--text font-weight-bold">{{ project_name }}</p>
                </div>
+               <app-alert/>
                <v-card flat color="transparent">
                   <v-card-text>
                      <v-form ref="form" @submit.prevent="onSubmit">
@@ -13,18 +14,20 @@
                         <v-text-field
                            v-model="email"
                            dark
-                           :rules="rules"
                            label="Email"
+                           :rules="rules"
                            required
+                           @focus="resetValidation"
                         ></v-text-field>
                   
                         <v-text-field
                            v-model="password"
                            dark
-                           :rules="rules"
                            label="Password"
                            type="password"
+                           :rules="rules"
                            required
+                           @focus="resetValidation"
                         ></v-text-field>
 
                         <div class="d-flex justify-end">
@@ -37,7 +40,7 @@
                </v-card>
             </v-container>
          </v-col>
-         <v-col cols="6" class="d-flex flex-column justify-center align-center bg-light" align-self="stretch">
+         <v-col cols="8" class="d-flex flex-column justify-center align-center bg-light" align-self="stretch">
             <v-img
                width="75%"
                contain
@@ -89,8 +92,16 @@ export default {
                }
             }).then((resp) => {
                this.SET_IS_AUTH(true)
+               this.$store.dispatch('clearAlert')
                this.$router.push('/')
-            }).catch((error) => { return error })
+            }).catch(() => { 
+               this.$store.dispatch('setAlert', {
+                  type: 'error',
+                  icon: 'mdi-alert-outline',
+                  message: 'Email atau kata sandi yang Anda masukkan tidak cocok dengan kredensial kami'
+               })
+               this.$store.dispatch('showAlert')
+            })
          }
       },
 
@@ -99,6 +110,10 @@ export default {
             this.$router.push('/')
          }
       },
+
+      resetValidation() {
+         this.$refs.form.resetValidation()
+      }
    },
 
 }
@@ -118,11 +133,11 @@ export default {
 } */
 
 .bg-primary {
-   background-color: #2962FF;
+   background-color: #2979FF;
 }
 
 .bg-light {
-   background-color: #f5f5f5;
+   background-color: #f8f9fa;
 }
 
 .mw-75 {
