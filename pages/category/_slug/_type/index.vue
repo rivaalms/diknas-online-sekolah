@@ -14,7 +14,6 @@
                   </v-card-title>
                   <v-card-text>
                      <data-table
-                        :headers="headers"
                         :items="data.data"
                         :total-page="data.last_page"
                         :current-page="data.current_page"
