@@ -3,7 +3,6 @@
    :type="alert.type"
    :icon="alert.icon"
    dismissible
-   text
    prominent
    border="left"
    transition="fade-transition"
