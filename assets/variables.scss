@@ -2,3 +2,25 @@
 //
 // The variables you want to modify
 // $font-size-root: 20px;
+
+@import '~vuetify/src/styles/styles.sass';
+
+$shades: (
+   'white': #f8f9fa,
+   'black': #212529,
+);
+
+$grey: (
+   'base': #ADB5BD,
+   'lighten-3': #EAEDF0,
+   'lighten-2': #DFE3E7,
+   'lighten-1': #CED4DA,
+   'darken-1': #6D767E,
+   'darken-2': #484F56,
+   'darken-3': #353B41,
+);
+
+$material-light: (
+   'background': #e9ecef,
+   'app-bar': map-get($shades, 'white'),
+);
