@@ -162,7 +162,6 @@ export default {
             await this.$axios.post(`/school/students`, this.targetItem).then(resp => {
                this.$store.dispatch('setAlert', {
                   type: 'info',
-                  color: 'light-blue darken-1',
                   icon: 'mdi-information',
                   message: 'Data statistik siswa baru berhasil dismpan'
                })
@@ -170,7 +169,6 @@ export default {
             }).catch(e => {
                this.$store.dispatch('setAlert', {
                   type: 'error',
-                  color: 'red darken-2',
                   icon: 'mdi-alert-outline',
                   message: e
                })

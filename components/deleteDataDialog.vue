@@ -60,7 +60,6 @@ export default {
          await this.$axios.delete(`/data/${item.id}/delete`, {data: item}).then((resp) => {
             this.$store.dispatch('setAlert', {
                type: 'warning',
-               color: 'red darken-2',
                icon: 'mdi-alert-outline',
                message: `Data <code>${item.id}</code> berhasil dihapus`
             })

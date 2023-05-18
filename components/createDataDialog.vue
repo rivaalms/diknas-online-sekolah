@@ -194,7 +194,6 @@ export default {
             await this.$axios.post(`/data/create`, formData).then((resp) => {
                this.$store.dispatch('setAlert' , {
                   type: 'info',
-                  color: 'green darken-1',
                   icon: 'mdi-information-outline',
                   message: `Data baru berhasil dibuat. ID data: <code>${resp.data.data.id}</code>`,
                })

@@ -243,7 +243,6 @@
                await this.$axios.post(`/school/data/${this.targetItem.id}/update`, formData)
                this.$store.dispatch('setAlert', {
                   type: 'info',
-                  color: 'light-blue darken-1',
                   icon: 'mdi-information-outline',
                   message: `Data <code>${this.targetItem.id}</code> berhasil disunting`,
                })

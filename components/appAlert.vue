@@ -1,10 +1,11 @@
 <template>
 <v-alert
    :type="alert.type"
-   :color="alert.color"
    :icon="alert.icon"
    dismissible
    text
+   prominent
+   border="left"
    transition="fade-transition"
    :value="alertTrigger"
 >
