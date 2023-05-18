@@ -76,7 +76,7 @@
                   v-bind="attrs"
                   icon
                   class="me-2"
-                  color="light-blue darken-2"
+                  color="primary"
                   v-on="on"
                   @click="downloadFile(item)"
                >
@@ -93,7 +93,7 @@
                   icon
                   :disabled="(item.data_status_id === 3) ? false : true"
                   class="me-2"
-                  color="orange darken-2"
+                  color="warning"
                   v-on="on"
                   @click="dialog('edit', item)"
                >
@@ -227,10 +227,10 @@ export default {
       },
 
       getColor(status) {
-         if (status === 1) return "grey lighten-4"
-         if (status === 2) return "green darken-1 white--text"
-         if (status === 3) return "deep-orange darken-1 white--text"
-         if (status === 4) return "cyan lighten-1 white--text"
+         if (status === 1) return "secondary"
+         if (status === 2) return "success"
+         if (status === 3) return "warning"
+         if (status === 4) return "info"
       },
 
       async downloadFile(item) {
@@ -255,14 +255,14 @@ export default {
                link.click()
                document.body.removeChild(link)
                this.$store.dispatch('setSnackbar', {
-                  color: 'green darken-3',
+                  color: 'success',
                   message: 'File berhasil diunduh.'
                })
                this.$store.dispatch('showSnackbar')
             })
          } catch (e) {
             this.$store.dispatch('setSnackbar', {
-               color: 'red darken-2',
+               color: 'error',
                message: 'File tidak ditemukan.'
             })
             this.$store.dispatch('showSnackbar')
