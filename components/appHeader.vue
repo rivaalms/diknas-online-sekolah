@@ -3,7 +3,7 @@
    app
    outlined
    flat
-   dark
+   light
    clipped-left
    class="app-bar"
 >
@@ -72,9 +72,3 @@ export default {
    }
 }
 </script>
-
-<style>
-.app-bar {
-   background-color: #2979FF!important;
-}
-</style>
