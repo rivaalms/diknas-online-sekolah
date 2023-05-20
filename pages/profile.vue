@@ -12,11 +12,11 @@
             <v-card-text>
               <v-row dense>
                 <v-col cols="12" md="6" class="d-flex">
-                  <v-avatar tile size="96" class="me-8">
+                  <!-- <v-avatar tile size="96" class="me-8">
                     <v-img
                       src="https://api.dicebear.com/6.x/adventurer-neutral/svg?seed=Jasper"
                     ></v-img>
-                  </v-avatar>
+                  </v-avatar> -->
                   <div class="flex-grow-1">
                     <p class="text-h6 mb-0">{{ user.name }}</p>
                     <p class="text-subtitle-2 blue--text">{{ user.email }}</p>

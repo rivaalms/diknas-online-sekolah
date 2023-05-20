@@ -17,14 +17,17 @@
                class="d-flex flex-basis-0 flex-shrink-1 flex-grow-0"
                v-on="on"
             >
-               <v-list-item-avatar>
+               <!-- <v-list-item-avatar>
                   <v-img
                      src="https://api.dicebear.com/6.x/adventurer-neutral/svg?seed=Jasper"
                   ></v-img>
-               </v-list-item-avatar>
+               </v-list-item-avatar> -->
                <v-list-item-content>
                   <v-list-item-title>{{ user.name }}</v-list-item-title>
                </v-list-item-content>
+               <v-list-item-icon>
+                  <v-icon>mdi-chevron-down</v-icon>
+               </v-list-item-icon>
             </v-list-item>
          </v-list>
       </template>
