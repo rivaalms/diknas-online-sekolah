@@ -31,12 +31,12 @@ export const state = () => ({
       },
       {
          text: 'Tipe data',
-         value: 'type'
+         value: 'data_type.name'
       },
       {
          text: 'Kategori',
          sortable: false,
-         value: 'category'
+         value: 'data_type.data_category.name'
       },
       {
          text: 'Tahun ajaran',
@@ -45,7 +45,7 @@ export const state = () => ({
       {
          text: 'Status',
          sortable: false,
-         value: 'status'
+         value: 'data_status.name'
       },
       {
          text: 'Terakhir diperbarui',

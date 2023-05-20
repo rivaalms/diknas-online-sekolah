@@ -56,13 +56,13 @@
    >
       <!-- //SECTION - Status Chips -->
       <!-- eslint-disable-next-line vue/valid-v-slot -->
-      <template #item.status="{item}">
+      <template #item.data_status.name="{item}">
          <v-chip
             class="font-weight-medium"
             :class="getColor(item.data_status_id)"
             pill
          >
-            {{ item.status }}
+            {{ item.data_status.name }}
          </v-chip>
       </template>
       <!-- //!SECTION -->
