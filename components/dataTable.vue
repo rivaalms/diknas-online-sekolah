@@ -292,7 +292,11 @@ export default {
 
             title = 'Sunting Data'
 
-            await this.$axios.get(`/school/getRevisionData/${this.targetItem.id}`).then((resp) => {
+            await this.$axios.get(`/getRevision`, {
+               params: {
+                  id: this.targetItem.id
+               }
+            }).then((resp) => {
                this.revisions = resp.data.data
             })
 

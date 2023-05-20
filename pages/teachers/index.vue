@@ -9,17 +9,17 @@
       <app-alert/>
 
       <v-row dense>
-         <v-col cpls="12">
+         <v-col cols="12">
             <v-card flat>
                <v-card-text class="d-flex align-center py-0 justify-space-between">
-                  <v-col cols="6" md="2">
-                     <v-select
+                  <v-col cols="6" md="3">
+                     <v-autocomplete
                         v-model="year"
                         :items="yearList"
                         label="Tahun ajaran"
-                        hide-details
+                        hide-details="auto"
                         @input="getTeachers(year)"
-                     ></v-select>
+                     ></v-autocomplete>
                   </v-col>
                   <v-btn
                      depressed
@@ -97,7 +97,11 @@ export default {
       },
 
       async setYearList() {
-         await this.$axios.get(`/school/getTeachersYear/${this.user.id}`).then((resp) => {
+         await this.$axios.get(`/getTeachersYear`, {
+            params: {
+               school: this.user.id
+            }
+         }).then((resp) => {
             const yearList = []
             resp.data.data.forEach((item) => {
                yearList.push(item.year)
@@ -111,7 +115,12 @@ export default {
          this.tableLoading = true
          this.cardLoader = true
          this.teachers = []
-         await this.$axios.get(`/school/getTeachers/${this.user.id}?year=${year}`).then((resp) => {
+         await this.$axios.get(`/getTeachers`, {
+            params: {
+               school: this.user.id,
+               year,
+            }
+         }).then((resp) => {
             let totalTeachers = 0
             for (const item in resp.data.data) {
                if (item !== 'school_id' && item !== 'year' && item !== 'id' && item !== 'created_at' && item !== 'updated_at') {

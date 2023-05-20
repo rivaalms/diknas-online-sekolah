@@ -270,7 +270,7 @@ export default {
             }
             // formData.append('school_id', this.user.id)
 
-            await this.$axios.post(`/school/teachers`, formData).then((resp) => {
+            await this.$axios.post(`/storeTeachers`, formData).then((resp) => {
                this.$store.dispatch('setAlert', {
                   type: 'info',
                   icon: 'mdi-information',

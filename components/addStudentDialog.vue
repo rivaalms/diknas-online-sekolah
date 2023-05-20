@@ -25,6 +25,7 @@
                      v-model="targetItem.grade"
                      :items="formGradeList"
                      required
+                     :rules="formSelectRules"
                      label="Kelas"
                   ></v-select>
                </v-col>
@@ -159,7 +160,7 @@ export default {
                   this.targetItem[item] = Number(this.targetItem[item])
                }
             }
-            await this.$axios.post(`/school/students`, this.targetItem).then(resp => {
+            await this.$axios.post(`/storeStudents`, this.targetItem).then(resp => {
                this.$store.dispatch('setAlert', {
                   type: 'info',
                   icon: 'mdi-information',

@@ -127,20 +127,27 @@ export default {
    },
    
    async mounted() {
-      await this.$axios.get(`/school/getData/${this.user.id}`).then((resp) => {
-         this.data = resp.data.data
-         this.loading = false
-      })
-      await this.getStudents(this.year)
-      await this.getTeachers(this.year)
+      await this.dataHandler()
+
       await this.getCategories()
+
+      await this.$axios.get('/getStudentTeacherCount', {
+         params: {
+            school_id: this.$auth.user.id,
+            year: this.year
+         }
+      }).then((resp) => {
+         this.totalStudents = resp.data.data.students
+         this.totalTeachers = resp.data.data.teachers
+      })
    },
 
    methods: {
       dataHandler(current, statusId, year) {
          this.loading = true
-         this.$axios.get(`/school/getData/${this.user.id}`, {
+         this.$axios.get(`/getData`, {
             params: {
+               school: this.$auth.user.id,
                page: current,
                status: statusId,
                year
@@ -148,30 +155,6 @@ export default {
          }).then((resp) => {
             this.data = resp.data.data
             this.loading = false
-         })
-      },
-
-      async getStudents(year) {
-         await this.$axios.get(`/school/getStudents/${this.user.id}?year=${year}`).then((resp) => {
-            let studentCountPerGrade = 0
-            let totalStudents = 0
-            resp.data.data.forEach((item) => {
-               studentCountPerGrade = item.islam + item.catholic + item.protestant + item.hindu + item.buddha + item.konghucu
-               totalStudents += studentCountPerGrade
-            })
-            this.totalStudents = totalStudents
-         })
-      },
-
-      async getTeachers(year) {
-         await this.$axios.get(`/school/getTeachers/${this.user.id}?year=${year}`).then((resp) => {
-            let totalTeachers = 0
-            for (const item in resp.data.data) {
-               if (item !== 'school_id' && item !== 'year' && item !== 'id' && item !== 'created_at' && item !== 'updated_at') {
-                  totalTeachers += resp.data.data[item]
-               }
-            }
-            this.totalTeachers = totalTeachers
          })
       },
 

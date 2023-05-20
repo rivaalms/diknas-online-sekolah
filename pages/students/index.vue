@@ -12,14 +12,14 @@
             <v-col cols="12">
                <v-card flat>
                   <v-card-text class="d-flex align-center justify-space-between py-0">
-                     <v-col cols="6" md="2">
-                        <v-select
+                     <v-col cols="6" md="3">
+                        <v-autocomplete
                            v-model="year"
                            :items="yearList"
+                           hide-details="auto"
                            label="Tahun ajaran"
-                           hide-details
                            @input="getStudents(year)"
-                        ></v-select>
+                        ></v-autocomplete>
                      </v-col>
                      <v-btn
                         depressed
@@ -46,7 +46,7 @@
                <v-card flat>
                   <v-card-text>
                      <p>{{ (item.grade === 0) ? 'Jumlah Siswa' : 'Kelas ' + item.grade }}</p>
-                     <p class="text-h4 font-weight-medium grey--text text--darken-4">{{ item.total }}</p>
+                     <p class="text-h4 font-weight-medium grey--text text--darken-3">{{ item.total }}</p>
                   </v-card-text>
                </v-card>
             </v-col>
@@ -120,22 +120,23 @@ export default {
       async getStudents(year) {
          this.tableLoading = true
          this.cardLoader = true
-         await this.$axios.get(`/school/getStudents/${this.user.id}?year=${year}`).then((resp) => {
-            this.students = resp.data.data
-            let studentCountPerGrade = 0
-            let totalStudents = 0
+         await this.$axios.get(`/getStudents`, {
+            params: {
+               school: this.user.id,
+               year,
+            }
+         }).then((resp) => {
+            this.students = resp.data.data.students
+            const totalStudents = resp.data.data.total_students
+
             const totalStudentsByGrade = []
             this.students.forEach((item) => {
-               studentCountPerGrade = item.islam + item.catholic + item.protestant + item.hindu + item.buddha + item.konghucu
-
                totalStudentsByGrade.push(
-                  {grade: item.grade, total: studentCountPerGrade}
+                  {grade: item.grade, total: item.total}
                )
-
-               totalStudents += studentCountPerGrade
             })
 
-            // this.totalStudents = totalStudents
+            // this.totalStudents = resp.data.data.total_students
             this.totalStudentsByGrade = totalStudentsByGrade
             this.totalStudentsByGrade.unshift(
                {grade: 0, total: totalStudents}
@@ -146,7 +147,11 @@ export default {
       },
       
       async setYearList() {
-         await this.$axios.get(`/school/getStudentsYear/${this.user.id}`).then((resp) => {
+         await this.$axios.get(`/getStudentsYear`, {
+            params: {
+               school: this.user.id,
+            }
+         }).then((resp) => {
             const yearList = []
             resp.data.data.forEach((item) => {
                yearList.push(item.year)

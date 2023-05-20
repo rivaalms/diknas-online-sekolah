@@ -57,7 +57,7 @@ export default {
       },
 
       async confirmDelete(item) {
-         await this.$axios.delete(`/data/${item.id}/delete`, {data: item}).then((resp) => {
+         await this.$axios.delete(`/data/delete/${item.id}`, {data: item}).then((resp) => {
             this.$store.dispatch('setAlert', {
                type: 'warning',
                icon: 'mdi-alert-outline',

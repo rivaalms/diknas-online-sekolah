@@ -133,8 +133,9 @@ export default {
    methods: {
       dataHandler(current, statusId) {
          this.loading = true
-         this.$axios.get(`/school/getData/${this.$auth.user.id}`, {
+         this.$axios.get(`/getData`, {
             params: {
+               school: this.$auth.user.id,
                page: current,
                status: statusId,
                category: this.category.id
