@@ -7,7 +7,8 @@
    clipped-left
    class="app-bar"
 >
-   <v-toolbar-title class="text-h6">diknas-online-sekolah</v-toolbar-title>
+   <v-app-bar-nav-icon class="d-block d-md-none" @click="$emit('toggle-sidebar')"></v-app-bar-nav-icon>
+   <v-app-bar-title class="d-none d-md-block text-h6">diknas-online-sekolah</v-app-bar-title>
    <v-spacer/>
    <v-menu offset-y>
       <template #activator="{on, attrs}">

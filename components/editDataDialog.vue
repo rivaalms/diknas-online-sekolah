@@ -11,7 +11,7 @@
          <!-- //SECTION - Edit Form -->
          <v-card-text>
             <v-row>
-               <v-col>
+               <v-col cols="12" md="6">
                   <p id="revisionText" class="text-subtitle-2">Catatan Revisi</p>
                   <div id="scrollerContainer" class="overflow-x-hidden overflow-y-auto">
                      <v-row dense>
@@ -28,7 +28,7 @@
                      </v-row>
                   </div>
                </v-col>
-               <v-col>
+               <v-col cols="12" md="6">
                   <v-form id="editForm" ref="editForm" enctype="multipart/form-data" @submit.prevent="submit">
                      <v-row>
                         <v-col cols="12" md="6">
@@ -215,7 +215,11 @@
             const formHeight = document.getElementById('editForm').offsetHeight
             const textHeight = document.getElementById('revisionText').offsetHeight
             this.scrollerHeight = formHeight - textHeight - 24 /* col padding */ - 16 /* text margin */
-            document.getElementById('scrollerContainer').setAttribute('style', `max-height: ${this.scrollerHeight}px!important`)
+            if (window.innerHeight >= 960) {
+               document.getElementById('scrollerContainer').setAttribute('style', `max-height: ${this.scrollerHeight}px!important`)
+            } else {
+               document.getElementById('scrollerContainer').setAttribute('style', `max-height: 150px!important`)
+            }
          },
 
          closeDialog() {

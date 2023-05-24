@@ -1,10 +1,9 @@
 <template>
   <v-container fluid>
     <div>
-      <div class="d-flex justify-space-between align-center mt-5 mb-8">
-        <p class="text-h6 mb-0">Profil Akun</p>
-        <app-breadcrumb/>
-      </div>
+      <page-header
+        :title="'Profil'"
+      />
 
       <v-row dense class="align-stretch">
         <v-col cols="12" md="8">

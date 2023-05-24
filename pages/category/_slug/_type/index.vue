@@ -1,10 +1,9 @@
 <template>
    <v-container fluid>
       <div>
-         <div class="d-flex justify-space-between align-center mt-5 mb-8">
-            <p class="text-h6 mb-0">{{ category.name }}: {{ type.name }}</p>
-            <app-breadcrumb/>
-         </div>
+         <page-header
+            :title="`${category.name}: ${type.name}`"
+         />
          
          <v-row dense>
             <v-col cols="12">
@@ -40,7 +39,7 @@
                            sm="4"
                            md="2"
                         >
-                           <v-card flat outlined class="v-btn text-capitalize" router :to="{name: 'category-slug-type', params: { slug: category.slug, type: item.slug }}" exact>
+                           <v-card flat outlined height="100%" class="v-btn text-capitalize" router :to="{name: 'category-slug-type', params: { slug: category.slug, type: item.slug }}" exact>
                               <v-card-text>
                                  {{ item.name }}
                               </v-card-text>
@@ -64,7 +63,7 @@
                            sm="4"
                            md="2"
                         >
-                           <v-card flat outlined class="v-btn text-capitalize" router :to="{name: 'category-slug', params: {slug: item.slug}}" exact>
+                           <v-card flat outlined height="100%" class="v-btn text-capitalize" router :to="{name: 'category-slug', params: {slug: item.slug}}" exact>
                               <v-card-text>
                                  {{ item.name }}
                               </v-card-text>

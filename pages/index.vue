@@ -1,10 +1,9 @@
 <template>
 <v-container fluid>
    <div>
-      <div class="d-flex justify-space-between align-center mt-5 mb-8">
-         <p class="text-h6 mb-0">Dashboard</p>
-         <app-breadcrumb/>
-      </div>
+      <page-header
+         :title="'Dashboard'"
+      />
       <v-row dense>
          <v-col cols="12" md="6">
             <v-card flat>
@@ -65,10 +64,11 @@
                      <v-col
                         v-for="item in categories"
                         :key="item.slug"
-                        cols="3" sm="4" md="2">
+                        cols="6" sm="4" md="2">
                         <v-card
                            flat
                            outlined
+                           height="100%"
                            class="v-btn text-capitalize"
                            router exact
                            :to="{name: 'category-slug', params: { slug: item.slug }}"

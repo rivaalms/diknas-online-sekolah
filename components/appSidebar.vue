@@ -1,9 +1,23 @@
 <template>
 <v-navigation-drawer
+   v-model="drawer"
    clipped
    app
+   mobile-breakpoint="960"
 >
+
 <v-list dense nav>
+   <v-list-item
+      v-if="isMobile"
+   >
+      <v-list-item-title class="text-subtitle-1">diknas-online-sekolah</v-list-item-title>
+      <v-list-item-action>
+         <v-btn icon @click.stop="drawer = !drawer">
+            <v-icon>mdi-menu</v-icon>
+         </v-btn>
+      </v-list-item-action>
+   </v-list-item>
+
    <v-list-item-group active-class="primary--text">
       <template v-for="(item, i) in route">
          <template v-if="item.child">
@@ -60,11 +74,46 @@ export default {
          type: Array,
          default: () => {}
       },
+      sidebar: {
+         type: Boolean,
+         default: false,
+      }
    },
 
    data() {
       return {
-         submenuIcon: 'mdi-chevron-down'
+         submenuIcon: 'mdi-chevron-down',
+         drawer: this.sidebar,
+         isMobile: false,
+      }
+   },
+
+   watch: {
+      sidebar() {
+         if (this.sidebar === true) {
+            this.drawer = this.sidebar
+         }
+      },
+      
+      drawer() {
+         this.checkIsMobile()
+         
+         // NOTE - DO NOT REMOVE THE `IF` STATEMENT, ELSE YOU GOT INFINITE LOOP
+         if (this.drawer === false || window.innerWidth >= 960) {
+            this.$emit('toggle-sidebar')
+         }
+      },
+   },
+
+   mounted() {
+      this.checkIsMobile()
+   },
+
+   methods: {
+      checkIsMobile() {
+         if (window.innerWidth >= 960) {
+            this.isMobile = false
+         } else this.isMobile = true
       }
    }
 }

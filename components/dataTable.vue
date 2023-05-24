@@ -4,10 +4,10 @@
    <app-alert/>
 
    <!-- //SECTION - Status Filter & New Data Btn -->
-   <div class="d-flex justify-space-between align-center">
-      <div class="d-flex align-center flex-grow-1">
+   <div class="d-flex flex-column flex-md-row justify-md-space-between align-center">
+      <div class="d-flex flex-column flex-md-row align-self-stretch align-md-center flex-grow-1">
          <span class="me-2 text-subtitle-2">Filter: </span>
-         <v-col cols="3">
+         <v-col cols="12" md="3" class="py-6 py-md-0">
             <v-select
                v-model="statusId"
                :items="status"
@@ -20,7 +20,7 @@
                @input="dataHandler()"
             ></v-select>
          </v-col>
-         <v-col cols="3">
+         <v-col cols="12" md="3" class="py-6 py-md-0">
             <v-text-field
                v-model="year"
                label="Tahun ajaran"
@@ -38,8 +38,9 @@
       <v-btn
          depressed
          color="primary"
+         class="mt-4 mt-md-0 align-self-end align-self-md-baseline"
          @click.stop="dialog('new')"
-      >
+         >
          Input Data
       </v-btn>
    </div>
@@ -124,7 +125,7 @@
    <!-- //!SECTION -->
 
    <!-- //SECTION - Table footer & Pagination -->
-   <div v-if="items" class="d-flex justify-space-between align-center">
+   <div v-if="items" class="d-flex flex-column flex-md-row justify-space-between align-center">
       <p class="text-caption mb-0">
          {{ from }}-{{ to }} dari {{ total }} data
       </p>

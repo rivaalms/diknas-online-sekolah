@@ -3,11 +3,14 @@
     <app-sidebar
       v-if="isAuth"
       :route="route"
+      :sidebar="sidebar"
+      @toggle-sidebar="() => toggleSidebar()"
     />
 
     <app-header
       v-if="isAuth"
       :user="$auth.user"
+      @toggle-sidebar="() => toggleSidebar()"
     />
     
     <v-main id="main">
@@ -55,6 +58,7 @@ export default {
         },
       ],
       categories: [],
+      sidebar: false,
     }
   },
 
@@ -98,6 +102,10 @@ export default {
 
     onAuth() {
       this.fetchCategories()
+    },
+    
+    toggleSidebar() {
+      this.sidebar = !this.sidebar
     }
   }
 }
