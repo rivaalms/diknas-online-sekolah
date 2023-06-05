@@ -107,6 +107,9 @@ export default {
 
    mounted() {
       this.checkIsMobile()
+      if (!this.isMobile) {
+         this.drawer = true
+      }
    },
 
    methods: {
