@@ -50,13 +50,14 @@ export default {
   ],
 
   auth: {
+    cookie: {
+      prefix: 'auth.school.'
+    },
+    localStorage: {
+      prefix: 'auth.school.'
+    },
     strategies: {
       local: {
-        cookie: {
-          cookie: {
-            name: 'school',
-          },
-        },
         endpoints: {
           login: { url: '/school/login', method: 'post', propertyName: 'data' },
           logout: { url: '/school/logout', method: 'post' },
