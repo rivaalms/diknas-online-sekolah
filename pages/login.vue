@@ -2,7 +2,7 @@
    <div id="container">
       <v-row dense>
          <v-col cols="12" md="4" class="bg-primary d-flex flex-column justify-center" align-self="stretch">
-            <v-container class="mw-md-75 mb-12 pb-md-12">
+            <v-container class="mb-12 pb-md-12">
                <div class="d-flex justify-center mb-6">
                   <p class="text-h4 white--text font-weight-bold">{{ project_name }}</p>
                </div>
@@ -23,7 +23,7 @@
                         <v-text-field
                            v-model="password"
                            dark
-                           label="Password"
+                           label="Kata sandi"
                            type="password"
                            :rules="rules"
                            required
@@ -46,7 +46,7 @@
                contain
                src="/Spreadsheets-pana.svg"
             ></v-img>
-            <p class="text-caption ma-0 align-self-end">Illustration by <a href="https://storyset.com">Storyset</a></p>
+            <p class="text-caption ma-0 align-self-end">Illustration by <a href="https://storyset.com" target="_blank">Storyset</a></p>
          </v-col>
       </v-row>
    </div>
@@ -94,11 +94,16 @@ export default {
                this.SET_IS_AUTH(true)
                this.$store.dispatch('clearAlert')
                this.$router.push('/')
-            }).catch(() => { 
+            }).catch(() => {
+               let message = ''
+               if (this.email.includes('@')) {
+                  message = 'Email atau kata sandi tidak sesuai dengan kredensial yang tersimpan.'
+               } else {
+                  message = 'Email tidak valid.'
+               }
                this.$store.dispatch('setAlert', {
                   type: 'error',
-                  icon: 'mdi-alert-outline',
-                  message: 'Email atau kata sandi yang Anda masukkan tidak cocok dengan kredensial kami'
+                  message,
                })
                this.$store.dispatch('showAlert')
             })
@@ -122,6 +127,7 @@ export default {
 <style>
 #container {
    min-height: 100%!important;
+   overflow: hidden;
    padding: 0;
    display: flex;
    justify-content: center;
@@ -138,10 +144,6 @@ export default {
 
 .bg-light {
    background-color: #f8f9fa;
-}
-
-.mw-75 {
-   max-width: 75%;
 }
 
 .v-application .error--text {

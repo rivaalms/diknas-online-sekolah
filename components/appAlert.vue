@@ -3,7 +3,6 @@
    :type="alert.type"
    :icon="alert.icon"
    dismissible
-   prominent
    border="left"
    transition="fade-transition"
    :value="alertTrigger"
